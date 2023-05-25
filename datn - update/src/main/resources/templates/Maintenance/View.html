@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="header :: myHeader"></div>
+</head>
+<body class="sb-nav-fixed">
+<div th:replace="navbar :: myNavbar"></div>
+<div id="layoutSidenav">
+  <div th:replace="sidebar :: mySidebar"></div>
+  <div id="layoutSidenav_content">
+    <div class="container">
+      <br>
+      <div style="color: mediumspringgreen;font-size: larger "th:text="${success}"></div>
+      <hr>
+      <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+        <li class="breadcrumb-item active">Thông tin bảo hành</a></li>
+      </ol>
+      <br>
+      <div class="row col-12 d-flex ">
+          <div class="card m-3 col-5" style="background-color: #b9dbe5">
+            <div class="card-header">Chi tiết</div>
+            <div class="card-body">
+              <h5 class="card-title">Còn hạn bảo hành</h5>
+              <p class="card-text">Các sản phẩm còn hạn bảo hành sẽ được bảo hành miễn phí</p>
+              <a href="#" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+          </div>
+        <div class="card m-3 col-5" style="background-color: #b9dbe5">
+          <div class="card-header">Chi tiết</div>
+          <div class="card-body">
+            <h5 class="card-title">Hết hạn bảo hành</h5>
+            <p class="card-text">các sản phẩm đã hết hạn bảo hành sẽ được bảo hành theo giá bảo hành công khai của công ty.</p>
+            <a href="#" class="btn btn-primary">Xem chi tiết</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+          <th>Mã Bảo hành</th>
+          <th>Mã sản phẩm</th>
+          <th>Mã đơn hàng</th>
+          <th>Tên sản phẩm</th>
+          <th>Tên khách hàng</th>
+          <th>Ngày kich hoạt bảo hành</th>
+          <th>Ngày hết hạn bảo hành</th>
+          <th>Chu kì bảo trì</th>
+          <th colspan="2" style="text-align: center">Options</th>
+        </tr>
+        </thead>
+        <tbody th:if="${#lists.isEmpty(MaintenanceList)}">
+        <tr>
+          <td colspan="3" style="color: red;">No Data found</td>
+        </tr>
+        </tbody>
+        <tbody id="myTable">
+        <tr th:each="itemRepairDto : ${MaintenanceList}">
+          <td th:text="${itemRepairDto.id}"></td>
+          <td th:text="${itemRepairDto.product.id}"></td>
+          <td th:text="${itemRepairDto.order_id}"></td>
+          <td th:text="${itemRepairDto.product.name}"></td>
+          <td th:text="${itemRepairDto.customerName}"></td>
+          <td th:text="${itemRepairDto.startDate}"></td>
+          <td th:text="${itemRepairDto.endDate}"></td>
+          <td th:text="${itemRepairDto.frequency}"></td>
+          <td><a
+                  th:href="@{/ItemMaintenanceEdit/{id}(id=${itemRepairDto.id})}"
+                  class="btn btn-primary"> Edit </a></td>
+          <td><a
+                  th:href="@{/ItemMaintenanceDelete/{id}(id=${itemRepairDto.id})}"
+                  class="btn btn-danger"> Delete </a></td>
+        </tr>
+        </tbody>
+      </table>
+      <a style="font-size: 20px" type="button" href="/ItemMaintenanceCreate"
+         class="btn btn-outline-primary" >
+        Thêm thông tin bảo hành<i class="fa fa-plus"></i>
+      </a>
+    </div>
+    <script type="text/javascript">
+      document.getElementById("myButton").onclick = function() {
+        location.href = "ItemRepairCreate";
+      };
+    </script>
+  </div>
+</div>
+<div th:replace="footer :: myFooter"></div>
+</body>
+</html>

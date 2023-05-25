@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="header :: myHeader"></div>
+</head>
+<body class="sb-nav-fixed">
+	<div th:replace="navbar :: myNavbar"></div>
+	<div id="layoutSidenav">
+		<div th:replace="sidebar :: mySidebar"></div>
+		<div id="layoutSidenav_content">
+			<div class="container">
+				<br>
+				<div style="color: mediumspringgreen;font-size: larger "th:text="${success}"></div>
+				<hr>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+					<li class="breadcrumb-item active">Lịch sử bảo hành</a></li>
+				</ol>
+				<br> <br>
+				<table class="table table-bordered table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>Mã Bảo hành</th>
+							<th>Mã sản phẩm</th>
+							<th>Tên sản phẩm</th>
+							<th>Tình trạng lỗi</th>
+							<th>Ngày hỏng thiết bị</th>
+							<th>Ngày bảo hành thiết bị</th>
+							<th>Chi phí sửa chữa</th>
+							<th colspan="2" style="text-align: center">Options</th>
+						</tr>
+					</thead>
+					<tbody th:if="${#lists.isEmpty(listRepair)}">
+						<tr>
+							<td colspan="3" style="color: red;">No Data found</td>
+						</tr>
+					</tbody>
+					<tbody id="myTable">
+						<tr th:each="itemRepair : ${listRepair}">
+							<td th:text="${itemRepair.id}"></td>
+							<td th:text="${itemRepair.product.id}"></td>
+							<td th:text="${itemRepair.product.name}"></td>
+							<td th:text="${itemRepair.failure}"></td>
+							<td th:text="${itemRepair.failureDate}"></td>
+							<td th:text="${itemRepair.fixedDate}"></td>
+							<td th:text="${#numbers.formatCurrency(itemRepair.price)}"></td>
+							<td><a
+								th:href="@{/ItemRepairEdit(id=${itemRepair.id})}"
+								class="btn btn-primary"> Edit </a></td>
+							<td><a
+								th:href="@{/ItemRepairDelete(id=${itemRepair.id})}"
+								class="btn btn-danger"> Delete </a></td>
+						</tr>
+					</tbody>
+				</table>
+				<a style="font-size: 20px" type="button" href="/ItemRepairCreate"
+						class="btn btn-outline-dark" >
+					Thêm thông tin bảo hành<i class="fa fa-plus"></i>
+				</a>
+			</div>
+			<script type="text/javascript">
+					document.getElementById("myButton").onclick = function() {
+						location.href = "ItemRepairCreate";
+					};
+				</script>
+		</div>
+	</div>
+	<div th:replace="footer :: myFooter"></div>
+</body>
+</html>

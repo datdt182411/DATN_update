@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <div th:replace="header :: myHeader"></div>
+    <title>Payment</title>
+</head>
+<body>
+
+<div class="container contact-form">
+    <div class="contact-image">
+        <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
+    </div>
+    <div class="row">
+        <h1 class="" style="color: #0e4075">Chuyển khoản thành công :
+            <data class="card-price"
+                  th:text="${#strings.replace(#numbers.formatCurrency(vnp_Amount), '.00', '  VNĐ')}"></data>
+        </h1>
+    </div>
+    <br>
+    <h3 class="" style="color: #0e4075">Vui lòng chờ người bán xác nhận đơn hàng của bạn! <br>
+        Hãy quay lại trang chủ để tiếp tục khám phá các sản phẩm mới nhé !</h3>
+
+    <a class=" btn btn-outline-primary m-3" href="/"> Quay lại</a>
+
+</div>
+</body>
+</html>
