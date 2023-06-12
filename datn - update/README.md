@@ -1,7 +1,5 @@
 # ĐỒ ÁN TỐT NGHIỆP
 
-## Link git code
-https://gitlab.com/nongoanh2000/datn?fbclid=IwAR29WdYvv8kqirw__kRJOfTRXqgdH_GET6lEEDUpWTCu1BWg5sX1Y0a__1c
 
 ## Hướng dẫn cài đặt
 1. Cài đặt Intellij Idea
